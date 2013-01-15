@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>frotel</name>
+	<displayName><![CDATA[Frotel]]></displayName>
+	<version><![CDATA[1]]></version>
+	<description><![CDATA[Frotel web service]]></description>
+	<author><![CDATA[Persian Prestashop]]></author>
+	<tab><![CDATA[shipping_logistics]]></tab>
+	<confirmUninstall>Please read the document before removing this module.</confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries>ir</limited_countries>
+</module>
