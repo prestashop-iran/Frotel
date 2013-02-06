@@ -260,6 +260,8 @@ class Frotel extends Module
             $res = urldecode($res);
             $cookie->__set('frotelKhadamat', $res); // store in cookie
         }
+		
+		Tools::addJS(($this->_path).'frotel.js');
         
     }
     

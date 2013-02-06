@@ -114,8 +114,9 @@ class FrotelCarrier extends CarrierModule
         if (!parent::install() OR 
          !$this->registerHook('updateCarrier') OR 
          !$this->registerHook('cart') OR 
-         !$this->registerHook('newOrder') OR 
-         !Configuration::updateValue('PS_CURRENCY_DEFAULT', $curency->getIdByIsoCode('IRT')))
+         !$this->registerHook('newOrder') //OR 
+         //!Configuration::updateValue('PS_CURRENCY_DEFAULT', $curency->getIdByIsoCode('IRT'))
+		 )
 			return false;
             
 		return true;
@@ -253,7 +254,7 @@ class FrotelCarrier extends CarrierModule
     /**
      * Hook Cart
      * if Cart get empty clear shipping cost Cache
-     * */
+     * 
      public function hookCart($params)
 	{
 	   global $cart;
@@ -264,10 +265,11 @@ class FrotelCarrier extends CarrierModule
        }
 	   
     }
+	*/
     
     /**
      * clear shipping cost Cache
-     * */
+     * 
     public function hooknewOrder($cart, $order, $customer, $currency, $orderStatus)
     {
         global $cookie;
@@ -276,6 +278,7 @@ class FrotelCarrier extends CarrierModule
                                         WHERE id_cart="'.$cart->id.'"');
         $cookie->__unset('payType');
     }
+	*/
     
 	/**
 	* Generate Hash string
@@ -405,7 +408,7 @@ class FrotelCarrier extends CarrierModule
 		  // Get shipping cost from Web Service
           $Res = $soap-> FCalcPPrice($TotalPrice,$TotalWeight,'0','1',$OMabda,$SMabda,$OMaghsad,$SMaghsad,Configuration::get('FROTEL_USERNAME'),Configuration::get('FROTEL_PASSWORD'));
           $Res = urldecode($Res);
-          if((int)$Res > 0){
+          if((int)$Res >= 0){
             $conversionRate = $this->getCartCurrencyRate( $rial, $currentCurrency);
             $price = ((float)$Res + (float)$cookie->frotelKhadamat) * $conversionRate;
             // Store cost as cache
@@ -424,7 +427,7 @@ class FrotelCarrier extends CarrierModule
 		  // Get shipping cost from Web Service
           $Res = $soap-> FCalcPPrice($TotalPrice,$TotalWeight,'0','2',$OMabda,$SMabda,$OMaghsad,$SMaghsad,Configuration::get('FROTEL_USERNAME'),Configuration::get('FROTEL_PASSWORD'));
           $Res = urldecode($Res);
-          if((int)$Res > 0)
+          if((int)$Res >= 0)
             {
             $conversionRate = $this->getCartCurrencyRate( $rial, $currentCurrency);
             $price = ((float)$Res + (float)$cookie->frotelKhadamat) * $conversionRate;
@@ -443,7 +446,7 @@ class FrotelCarrier extends CarrierModule
 		  // Get shipping cost from Web Service
           $Res = $soap-> FCalcPPrice($TotalPrice,$TotalWeight,'1','1',$OMabda,$SMabda,$OMaghsad,$SMaghsad,Configuration::get('FROTEL_USERNAME'),Configuration::get('FROTEL_PASSWORD'));
           $Res = urldecode($Res);
-          if((int)$Res > 0){
+          if((int)$Res >= 0){
             $conversionRate = $this->getCartCurrencyRate( $rial, $currentCurrency);
             $price = ((float)$Res + (float)$cookie->frotelKhadamat) * $conversionRate;
             // Store cost as cache
@@ -462,7 +465,7 @@ class FrotelCarrier extends CarrierModule
 		  // Get shipping cost from Web Service
           $Res = $soap-> FCalcPPrice($TotalPrice,$TotalWeight,'1','2',$OMabda,$SMabda,$OMaghsad,$SMaghsad,Configuration::get('FROTEL_USERNAME'),Configuration::get('FROTEL_PASSWORD'));
           $Res = urldecode($Res);
-          if((int)$Res > 0)
+          if((int)$Res >= 0)
             {
             $conversionRate = $this->getCartCurrencyRate( $rial, $currentCurrency);
             $price = ((float)$Res + (float)$cookie->frotelKhadamat) * $conversionRate;
